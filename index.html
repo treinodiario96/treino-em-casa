@@ -81,47 +81,15 @@
 </header>
 <div class="container">
 
-<div id="auth" class="card">
-  <h2>Login / Cadastro</h2>
-  <input id="username" placeholder="Usuário" />
-  <input id="password" type="password" placeholder="Senha" />
-  <button onclick="login()">Entrar</button>
-</div>
+
 
 <div id="treinos" class="hidden">
 
-  <div class="card" id="loginCard">
-  <h2>Login / Cadastro</h2>
+  
 
-  <input id="usuario" placeholder="Usuário">
-  <input id="senha" type="password" placeholder="Senha">
 
-  <button onclick="entrar()">Entrar</button>
-  <button class="secondary" onclick="cadastrar()">Cadastrar</button>
 
-  <p id="msg" class="small"></p>
-</div>
 
-<div class="card hidden" id="app">
-  <h2>Bem-vindo, <span id="nomeUsuario"></span> 👋</h2>
-  <p class="small">Você está logado no TreinoDiário.</p>
-
-  <button onclick="abrirConta()">Minha conta</button>
-  <button class="secondary" onclick="logout()">Sair</button>
-</div>
-
-<div class="card hidden" id="conta">
-  <h2>Minha conta</h2>
-
-  <label class="small">Usuário</label>
-  <input id="contaUsuario" disabled>
-
-  <label class="small">Nova senha</label>
-  <input id="novaSenha" type="password" placeholder="Digite nova senha">
-
-  <button onclick="salvarConta()">Salvar alterações</button>
-  <button class="secondary" onclick="voltarApp()">Voltar</button>
-</div>
 
   <div class="card">
     <h2>Perfil</h2>
@@ -184,7 +152,7 @@
   </div>
 
   <div class="card">
-    <button class="secondary" onclick="logout()">Sair</button>
+    
   </div>
 </div>
 </div>
@@ -271,58 +239,25 @@ function editarExercicio(nivel,index){
 
 document.addEventListener('DOMContentLoaded',trocarNivel);
 
-function cadastrar() {
-  const user = document.getElementById("usuario").value;
-  const pass = document.getElementById("senha").value;
 
-  if (!user || !pass) {
-    alert("Preencha usuário e senha");
-    return;
-  }
 
   localStorage.setItem("user", user);
   localStorage.setItem("pass", pass);
   alert("Cadastro realizado com sucesso!");
 }
 
-function entrar() {
-  const user = document.getElementById("usuario").value;
-  const pass = document.getElementById("senha").value;
-
-  const userSalvo = localStorage.getItem("user");
-  const passSalvo = localStorage.getItem("pass");
-
-  if (user === userSalvo && pass === passSalvo) {
-    document.getElementById("loginCard").classList.add("hidden");
-    document.getElementById("app").classList.remove("hidden");
-    document.getElementById("nomeUsuario").innerText = user;
-  } else {
+ else {
     alert("Usuário ou senha incorretos");
   }
 }
 
-function abrirConta() {
-  document.getElementById("app").classList.add("hidden");
-  document.getElementById("conta").classList.remove("hidden");
-  document.getElementById("contaUsuario").value = localStorage.getItem("user");
-}
 
-function salvarConta() {
-  const nova = document.getElementById("novaSenha").value;
-  if (!nova) return alert("Digite uma nova senha");
-  localStorage.setItem("pass", nova);
-  alert("Senha atualizada com sucesso");
-  voltarApp();
-}
 
-function voltarApp() {
-  document.getElementById("conta").classList.add("hidden");
-  document.getElementById("app").classList.remove("hidden");
-}
 
-function logout() {
-  location.reload();
-}
+
+
+
+
 </script>
 <script>
   window.addEventListener('load',()=>{
