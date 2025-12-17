@@ -142,6 +142,19 @@
   <div class="card">
     <h2>Exercícios</h2>
     <div id="listaExercicios"></div>
+      <div class="card"><strong>Flexão de braço</strong><p class="small">3x8–10</p><button class="secondary" onclick="mostrarExercicio('Flexão de braço','Mãos apoiadas no chão na linha dos ombros. Corpo totalmente reto. Flexione os braços até o peito se aproximar do chão e empurre para cima.')">Ver como fazer</button></div>
+      <div class="card"><strong>Prancha abdominal</strong><p class="small">3x30s</p><button class="secondary" onclick="mostrarExercicio('Prancha abdominal','Apoie antebraços e pontas dos pés no chão. Corpo alinhado, abdômen contraído e respiração controlada.')">Ver como fazer</button></div>
+      <div class="card"><strong>Abdominal tradicional</strong><p class="small">3x15</p><button class="secondary" onclick="mostrarExercicio('Abdominal','Deitado, joelhos flexionados, mãos atrás da cabeça. Eleve o tronco contraindo o abdômen e retorne lentamente.')">Ver como fazer</button></div>
+      <div class="card"><strong>Elevação de quadril</strong><p class="small">3x12</p><button class="secondary" onclick="mostrarExercicio('Elevação de quadril','Deitado de costas, joelhos dobrados. Eleve o quadril apertando os glúteos, segure 1 segundo e desça.')">Ver como fazer</button></div>
+      <div class="card"><strong>Polichinelo</strong><p class="small">3x30s</p><button class="secondary" onclick="mostrarExercicio('Polichinelo','Salte abrindo pernas e braços ao mesmo tempo. Retorne fechando tudo. Mantenha ritmo constante.')">Ver como fazer</button></div>
+      <div class="card"><strong>Corrida parada</strong><p class="small">3x40s</p><button class="secondary" onclick="mostrarExercicio('Corrida parada','Corra no lugar elevando os joelhos. Mantenha postura ereta e respiração controlada.')">Ver como fazer</button></div>
+    </div>
+      <div class="card">
+        <strong>Flexão de braço</strong>
+        <p class="small">3 séries de 8 a 10 repetições</p>
+        <button class="secondary" onclick="mostrarExercicio('Flexão de braço','Apoie as mãos no chão na linha dos ombros. Corpo reto, abdômen contraído. Flexione os braços e empurre o chão para voltar.')">Ver como fazer</button>
+      </div>
+    </div>
     <button onclick="concluirTreino()">Concluir treino</button>
   </div>
 
@@ -177,6 +190,87 @@
 </div>
 
 <script>
+const exerciciosPorNivel = {
+  iniciante: {
+    pernas:[
+      {nome:'Agachamento',series:'3x10',musculos:'Quadríceps, glúteos, posterior de coxa',descricao:'Pés na largura dos ombros, costas retas. Flexione os joelhos descendo controlado e suba.'},
+      {nome:'Elevação de quadril',series:'3x12',musculos:'Glúteos, lombar',descricao:'Deitado, joelhos flexionados. Eleve o quadril contraindo os glúteos.'}
+    ],
+    superiores:[
+      {nome:'Flexão inclinada',series:'3x8',musculos:'Peitoral, tríceps, ombros',descricao:'Mãos apoiadas em banco ou parede, corpo alinhado, flexione os braços.'}
+    ],
+    core:[
+      {nome:'Prancha',series:'3x20s',musculos:'Abdômen, lombar',descricao:'Antebraços no chão, corpo reto e abdômen contraído.'}
+    ]
+  },
+  intermediario: {
+    pernas:[
+      {nome:'Agachamento',series:'4x12',musculos:'Quadríceps, glúteos',descricao:'Agachamento completo mantendo controle do movimento.'}
+    ],
+    superiores:[
+      {nome:'Flexão de braço',series:'4x10',musculos:'Peitoral, tríceps, ombros',descricao:'Flexão tradicional com corpo alinhado.'}
+    ],
+    core:[
+      {nome:'Prancha lateral',series:'3x30s',musculos:'Oblíquos, core',descricao:'Apoio lateral mantendo o corpo reto.'}
+    ]
+  },
+  avancado: {
+    pernas:[
+      {nome:'Agachamento com salto',series:'4x12',musculos:'Pernas, glúteos, core',descricao:'Agache e salte de forma explosiva mantendo controle.'}
+    ],
+    superiores:[
+      {nome:'Flexão explosiva',series:'4x12',musculos:'Peitoral, tríceps, ombros',descricao:'Flexão com impulso tirando as mãos do chão.'}
+    ],
+    core:[
+      {nome:'Prancha com toque no ombro',series:'3x40s',musculos:'Core, ombros',descricao:'Em prancha, toque alternadamente os ombros.'}
+    ]
+  }
+};
+
+function trocarNivel(){
+  const nivel = document.getElementById('nivel').value;
+  const lista = document.getElementById('listaExercicios');
+  lista.innerHTML='';
+
+  const grupos = exerciciosPorNivel[nivel];
+  Object.keys(grupos).forEach(grupo=>{
+    const titulo=document.createElement('h3');
+    titulo.innerText=grupo.toUpperCase();
+    lista.appendChild(titulo);
+
+    grupos[grupo].forEach(e=>{
+      const div=document.createElement('div');
+      div.className='card';
+      div.innerHTML=`<strong>${e.nome}</strong>
+        <p class='small'>${e.series}</p>
+        <p class='small'><strong>Músculos:</strong> ${e.musculos}</p>
+        <button class='secondary' onclick="mostrarExercicio('${e.nome}','${e.descricao}')">Ver como fazer</button>`;
+      lista.appendChild(div);
+    });
+  });
+}</strong>
+      <p class='small'>${e.series}</p>
+      <p class='small'><strong>Músculos:</strong> ${e.musculos}</p>
+      <button class='secondary' onclick=\"mostrarExercicio('${e.nome}','${e.descricao}')\">Ver como fazer</button>
+      <button class='secondary' onclick=\"editarExercicio('${nivel}',${i})\">Editar</button>`;
+    lista.appendChild(div);
+  });
+}
+
+function editarExercicio(nivel,index){
+  const ex = exerciciosPorNivel[nivel][index];
+  const nome = prompt('Nome do exercício',ex.nome);
+  const series = prompt('Séries',ex.series);
+  const musculos = prompt('Músculos trabalhados',ex.musculos);
+  const descricao = prompt('Como executar',ex.descricao);
+  if(nome && series && musculos && descricao){
+    exerciciosPorNivel[nivel][index]={nome,series,musculos,descricao};
+    trocarNivel();
+  }
+}
+
+document.addEventListener('DOMContentLoaded',trocarNivel);
+
 function cadastrar() {
   const user = document.getElementById("usuario").value;
   const pass = document.getElementById("senha").value;
@@ -270,5 +364,22 @@ function logout() {
   </div>
 </div>
 
+<div id="modalExercicio" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:9999;">
+  <div class="card" style="max-width:420px;">
+    <h2 id="tituloExercicio"></h2>
+    <p id="descricaoExercicio" class="small"></p>
+    <button onclick="fecharExercicio()">Fechar</button>
+  </div>
+</div>
+<script>
+function mostrarExercicio(titulo, descricao){
+  document.getElementById('tituloExercicio').innerText = titulo;
+  document.getElementById('descricaoExercicio').innerText = descricao;
+  document.getElementById('modalExercicio').classList.remove('hidden');
+}
+function fecharExercicio(){
+  document.getElementById('modalExercicio').classList.add('hidden');
+}
+</script>
 </body>
 </html>
