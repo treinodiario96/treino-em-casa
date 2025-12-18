@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treino Diário</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin:0;
+    padding:0;
+    background: linear-gradient(to bottom, #a8e6cf 0%, #56ab2f 100%);
+    color:#222;
+  }
+
+  header {
+    background: rgba(255,255,255,0.9);
+    color:#222;
+    padding:25px 20px;
+    text-align:center;
+    border-bottom:2px solid #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  header h1 { margin:0; font-size:2.4em; }
+  header p { margin:5px 0 0 0; font-size:1em; }
+
+  nav { background: rgba(0,0,0,0.7); padding:12px; text-align:center; box-shadow: 0 2px 5px rgba(0,0,0,0.2);}
+  nav a { color:white; margin:0 15px; text-decoration:none; font-weight:bold; transition: color 0.3s;}
+  nav a:hover { color:#a8e6cf; }
+
+  section { padding:25px 20px; max-width:1200px; margin:auto; background: rgba(255,255,255,0.9); border-radius:10px; margin-bottom:25px; box-shadow:0 4px 10px rgba(0,0,0,0.1);}
+  h2 { border-bottom:2px solid #222; padding-bottom:8px; margin-bottom:20px; font-size:1.8em; }
+  .nivel-section { margin-bottom:40px; }
+  .treino-container { display:flex; flex-wrap:wrap; gap:20px; }
+
+  .treino-card { 
+    background:white; 
+    border-radius:12px; 
+    padding:20px; 
+    flex:1 1 calc(33% - 20px); 
+    min-width:260px; 
+    box-shadow:0 6px 15px rgba(0,0,0,0.1); 
+    position:relative; 
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .treino-card:hover { transform: translateY(-5px); box-shadow:0 12px 25px rgba(0,0,0,0.2);}
+  
+  .treino-card svg { width:80px; height:80px; margin-bottom:12px; fill:#56ab2f; }
+
+  .treino-card h4 { margin:0 0 10px 0; font-size:1.2em; }
+  .treino-card p { margin:6px 0; font-size:0.95em; line-height:1.4; }
+
+  .btn-substituir { 
+    margin-top:12px; 
+    padding:8px 15px; 
+    background:#56ab2f; 
+    color:white; 
+    border:none; 
+    border-radius:6px; 
+    cursor:pointer; 
+    transition: background 0.3s;
+  }
+  .btn-substituir:hover { background:#a8e6cf; color:#222; }
+
+  .select-substituir { margin-top:10px; padding:7px; display:none; width:100%; border-radius:6px; border:1px solid #ccc; }
+
+  footer {
+    background: #2c6e49; 
+    color:white;
+    text-align:center;
+    padding:25px 20px;
+    font-size:0.95em;
+  }
+  footer a { color:#fff; margin:0 10px; text-decoration:underline; transition: color 0.3s;}
+  footer a:hover { color:#a8e6cf; }
+
+  @media(max-width:900px){ .treino-card { flex:1 1 calc(50% - 20px); } }
+  @media(max-width:600px){ .treino-card { flex:1 1 100%; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Treino Diário</h1>
+  <p>Treine em casa de forma simples e eficiente todos os dias.</p>
+</header>
+
+<nav>
+  <a href="#inicio">Início</a>
+  <a href="#treinos">Treinos</a>
+  <a href="#contato">Contato</a>
+</nav>
+
+<section id="inicio">
+  <h2>Bem-vindo!</h2>
+  <p>Organize seus treinos diários com exercícios detalhados, separados por nível e grupo muscular. Substitua qualquer exercício dentro do mesmo grupo para variar sua rotina.</p>
+</section>
+
+<section id="treinos">
+  <h2>Treinos por Nível</h2>
+
+  <div id="treinos-iniciante" class="nivel-section">
+    <h3>Iniciante</h3>
+    <div class="treino-container"></div>
+  </div>
+
+  <div id="treinos-intermediario" class="nivel-section">
+    <h3>Intermediário</h3>
+    <div class="treino-container"></div>
+  </div>
+
+  <div id="treinos-avancado" class="nivel-section">
+    <h3>Avançado</h3>
+    <div class="treino-container"></div>
+  </div>
+</section>
+
+<section id="contato">
+  <h2>Contato</h2>
+  <p>Email: <a href="mailto:treinodiario96@gmail.com">treinodiario96@gmail.com</a></p>
+</section>
+
+<footer>
+  <p>&copy; 2025 Treino Diário</p>
+  <p>
+    <a href="#">Termos</a> |
+    <a href="#">Privacidade</a> |
+    <a href="mailto:treinodiario96@gmail.com">Contato</a>
+  </p>
+</footer>
+
+<script>
+const treinosPorNivel = {
+  iniciante: document.querySelector('#treinos-iniciante .treino-container'),
+  intermediario: document.querySelector('#treinos-intermediario .treino-container'),
+  avancado: document.querySelector('#treinos-avancado .treino-container')
+};
+
+// SVG simplificado para cada grupo muscular
+const svgs = {
+  pernas: `<svg viewBox="0 0 64 64"><circle cx="32" cy="10" r="4"/><rect x="30" y="14" width="4" height="20"/><line x1="32" y1="34" x2="20" y2="54" stroke="#56ab2f" stroke-width="4"/><line x1="32" y1="34" x2="44" y2="54" stroke="#56ab2f" stroke-width="4"/></svg>`,
+  peito: `<svg viewBox="0 0 64 64"><circle cx="32" cy="10" r="4"/><line x1="32" y1="14" x2="32" y2="50" stroke="#56ab2f" stroke-width="4"/><line x1="32" y1="24" x2="20" y2="40" stroke="#56ab2f" stroke-width="4"/><line x1="32" y1="24" x2="44" y2="40" stroke="#56ab2f" stroke-width="4"/></svg>`,
+  bracos: `<svg viewBox="0 0 64 64"><circle cx="32" cy="10" r="4"/><line x1="32" y1="14" x2="32" y2="50" stroke="#56ab2f" stroke-width="4"/><line x1="32" y1="24" x2="16" y2="36" stroke="#56ab2f" stroke-width="4"/><line x1="32" y1="24" x2="48" y2="36" stroke="#56ab2f" stroke-width="4"/></svg>`,
+  ombros: `<svg viewBox="0 0 64 64"><circle cx="32" cy="10" r="6"/><line x1="32" y1="16" x2="32" y2="50" stroke="#56ab2f" stroke-width="4"/><line x1="32" y1="20" x2="16" y2="36" stroke="#56ab2f" stroke-width="4"/><line x1="32" y1="20" x2="48" y2="36" stroke="#56ab2f" stroke-width="4"/></svg>`,
+  costas: `<svg viewBox="0 0 64 64"><circle cx="32" cy="10" r="4"/><line x1="32" y1="14" x2="32" y2="50" stroke="#56ab2f" stroke-width="4"/><line x1="32" y1="24" x2="20" y2="44" stroke="#56ab2f" stroke-width="4"/><line x1="32" y1="24" x2="44" y2="44" stroke="#56ab2f" stroke-width="4"/></svg>`,
+  abdomen: `<svg viewBox="0 0 64 64"><circle cx="32" cy="10" r="4"/><rect x="30" y="14" width="4" height="36"/><line x1="30" y1="20" x2="20" y2="40" stroke="#56ab2f" stroke-width="2"/><line x1="34" y1="20" x2="44" y2="40" stroke="#56ab2f" stroke-width="2"/></svg>`
+};
+
+const exercicios = [
+  {id:'agachamento', nome:'Agachamento', musculo:'pernas', nivel:'iniciante', descricao:'Fique em pé, pés na largura dos ombros. Dobre os joelhos empurrando o quadril para trás como se fosse sentar. Volte à posição inicial.', musculos:'Quadríceps, Glúteos, Posterior de Coxa'},
+  {id:'stiff', nome:'Stiff', musculo:'pernas', nivel:'intermediario', descricao:'Segure halteres à frente. Incline o tronco para frente mantendo as costas retas e joelhos levemente flexionados. Retorne.', musculos:'Posterior de Coxa, Glúteos'},
+  {id:'agachamento-bulgaro', nome:'Agachamento Búlgaro', musculo:'pernas', nivel:'avancado', descricao:'Apoie um pé em banco atrás de você, outro à frente. Desça o joelho da frente até 90 graus e suba.', musculos:'Quadríceps, Glúteos'},
+  {id:'afundo', nome:'Afundo/Passada', musculo:'pernas', nivel:'intermediario', descricao:'Dê um passo à frente e flexione os joelhos até quase tocar o chão. Retorne e troque de perna.', musculos:'Quadríceps, Glúteos, Posterior de Coxa'},
+  {id:'elevacao-pelvica', nome:'Elevação Pélvica (Ponte)', musculo:'pernas', nivel:'iniciante', descricao:'Deite de costas, pés no chão, joelhos flexionados. Eleve quadril até formar linha reta do ombro aos joelhos. Retorne.', musculos:'Glúteos, Posterior de Coxa'},
+  {id:'flexao-joelho', nome:'Flexão de joelho', musculo:'pernas', nivel:'iniciante', descricao:'Deite de barriga para baixo. Flexione os joelhos levando calcanhares aos glúteos e retorne devagar.', musculos:'Posterior de Coxa'},
+  {id:'flexao-braco', nome:'Flexão de Braço', musculo:'peito', nivel:'iniciante', descricao:'Corpo reto, mãos no chão. Flexione os cotovelos até o peito quase tocar o chão. Retorne.', musculos:'Peito, Tríceps, Ombros'},
+  {id:'supino', nome:'Supino (halteres ou barra)', musculo:'peito', nivel:'intermediario', descricao:'Deite no banco, segure halteres/barra. Flexione cotovelos levando o peso ao peito e empurre de volta.', musculos:'Peito, Tríceps, Ombros'},
+  {id:'desenvolvimento-ombros', nome:'Desenvolvimento de Ombros', musculo:'ombros', nivel:'intermediario', descricao:'Halteres ao lado dos ombros. Empurre para cima até braços estendidos. Retorne.', musculos:'Ombros, Tríceps'},
+  {id:'elevacao-lateral', nome:'Elevação Lateral', musculo:'ombros', nivel:'iniciante', descricao:'Halteres ao lado. Levante lateralmente até altura dos ombros e desça lentamente.', musculos:'Ombros'},
+  {id:'biceps', nome:'Bíceps (halteres)', musculo:'bracos', nivel:'iniciante', descricao:'Braços ao lado do corpo. Flexione cotovelos levantando halteres e volte.', musculos:'Bíceps'},
+  {id:'triceps-halteres', nome:'Tríceps (halteres)', musculo:'bracos', nivel:'iniciante', descricao:'Halteres acima da cabeça, braços estendidos. Flexione cotovelos atrás da cabeça e volte.', musculos:'Tríceps'},
+  {id:'triceps-cadeira', nome:'Tríceps na Cadeira', musculo:'bracos', nivel:'iniciante', descricao:'Mãos na borda da cadeira, pés à frente. Flexione cotovelos descendo o corpo. Suba novamente.', musculos:'Tríceps'},
+  {id:'remada-curvada', nome:'Remada Curvada (halteres)', musculo:'costas', nivel:'intermediario', descricao:'Segure halteres, tronco inclinado, costas retas. Puxe halteres ao abdômen e desça devagar.', musculos:'Costas, Bíceps'},
+  {id:'prancha', nome:'Prancha', musculo:'abdomen', nivel:'iniciante', descricao:'Apoie antebraços e pés, corpo reto. Contraia abdômen, mantenha quadril elevado.', musculos:'Abdômen, Core, Ombros'},
+  {id:'prancha-lateral', nome:'Prancha Lateral', musculo:'abdomen', nivel:'intermediario', descricao:'Apoie antebraço e lado do pé. Corpo reto, quadril elevado. Segure.', musculos:'Abdômen lateral, Core, Ombros'},
+  {id:'abdominal-supra', nome:'Abdominal Supra', musculo:'abdomen', nivel:'iniciante', descricao:'Deite de costas, joelhos flexionados. Eleve tronco em direção aos joelhos e volte devagar.', musculos:'Abdômen superior'}
+];
+
+function criarCard(ex) {
+  const card = document.createElement('div');
+  card.className = 'treino-card';
+  card.setAttribute('data-nivel', ex.nivel);
+  card.setAttribute('data-musculo', ex.musculo);
+  card.setAttribute('data-exercicio-id', ex.id);
+
+  card.innerHTML = `
+    ${svgs[ex.musculo] || svgs['bracos']}
+    <h4>${ex.nome}</h4>
+    <p>Músculos: ${ex.musculos}</p>
+    <p>Como fazer: ${ex.descricao}</p>
+    <button class="btn-substituir">Substituir exercício</button>
+    <select class="select-substituir"></select>
+  `;
+
+  const btn = card.querySelector('.btn-substituir');
+  const select = card.querySelector('.select-substituir');
+  const opcoes = exercicios.filter(e => e.musculo === ex.musculo && e.nivel === ex.nivel && e.id !== ex.id);
+
+  if(opcoes.length > 0){
+    opcoes.forEach(e => {
+      const option = document.createElement('option');
+      option.value = e.id;
+      option.textContent = e.nome;
+      select.appendChild(option);
+    });
+    btn.addEventListener('click', ()=>{ select.style.display = select.style.display==='block'?'none':'block'; });
+    select.addEventListener('change', ()=>{
+      const eEscolhido = exercicios.find(ev=>ev.id===select.value);
+      if(eEscolhido){
+        card.setAttribute('data-exercicio-id', eEscolhido.id);
+        card.querySelector('h4').textContent = eEscolhido.nome;
+        card.querySelector('p:nth-of-type(1)').textContent = 'Músculos: '+eEscolhido.musculos;
+        card.querySelector('p:nth-of-type(2)').textContent = 'Como fazer: '+eEscolhido.descricao;
+        // Atualizar SVG
+        card.querySelector('svg').outerHTML = svgs[eEscolhido.musculo] || svgs['bracos'];
+        select.style.display='none';
+      }
+    });
+  } else { btn.style.display='none'; }
+
+  return card;
+}
+
+exercicios.forEach(ex=>{
+  treinosPorNivel[ex.nivel].appendChild(criarCard(ex));
+});
+</script>
+
+</body>
+</html>
