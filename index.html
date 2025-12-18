@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treino Diário</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin:0;
+    padding:0;
+    background: linear-gradient(to bottom, #a8e6cf 0%, #56ab2f 100%);
+    color:#222;
+  }
+
+  header {
+    background: rgba(255,255,255,0.9);
+    color:#222;
+    padding:25px 20px;
+    text-align:center;
+    border-bottom:2px solid #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  header h1 { margin:0; font-size:2.4em; }
+  header p { margin:5px 0 0 0; font-size:1em; }
+
+  nav { background: rgba(0,0,0,0.7); padding:12px; text-align:center; box-shadow: 0 2px 5px rgba(0,0,0,0.2);}
+  nav a { color:white; margin:0 15px; text-decoration:none; font-weight:bold; transition: color 0.3s;}
+  nav a:hover { color:#a8e6cf; }
+
+  section { padding:25px 20px; max-width:1200px; margin:auto; background: rgba(255,255,255,0.9); border-radius:10px; margin-bottom:25px; box-shadow:0 4px 10px rgba(0,0,0,0.1);}
+  h2 { border-bottom:2px solid #222; padding-bottom:8px; margin-bottom:20px; font-size:1.8em; }
+  .nivel-section { margin-bottom:40px; }
+  .treino-container { display:flex; flex-wrap:wrap; gap:20px; }
+
+  .treino-card { 
+    background:white; 
+    border-radius:12px; 
+    padding:20px; 
+    flex:1 1 calc(33% - 20px); 
+    min-width:260px; 
+    box-shadow:0 6px 15px rgba(0,0,0,0.1); 
+    position:relative; 
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .treino-card:hover { transform: translateY(-5px); box-shadow:0 12px 25px rgba(0,0,0,0.2);}
+  
+  .treino-card svg { width:80px; height:80px; margin-bottom:12px; fill:#56ab2f; }
+
+  .treino-card h4 { margin:0 0 10px 0; font-size:1.2em; }
+  .treino-card p { margin:6px 0; font-size:0.95em; line-height:1.4; }
+
+  .btn-substituir { 
+    margin-top:12px; 
+    padding:8px 15px; 
+    background:#56ab2f; 
+    color:white; 
+    border:none; 
+    border-radius:6px; 
+    cursor:pointer; 
+    transition: background 0.3s;
+  }
+  .btn-substituir:hover { background:#a8e6cf; color:#222; }
+
+  .select-substituir { margin-top:10px; padding:7px; display:none; width:100%; border-radius:6px; border:1px solid #ccc; }
+
+  footer {
+    background: #2c6e49; 
+    color:white;
+    text-align:center;
+    padding:25px 20px;
+    font-size:0.95em;
+  }
+  footer a { color:#fff; margin:0 10px; text-decoration:underline; transition: color 0.3s;}
+  footer a:hover { color:#a8e6cf; }
+
+  @media(max-width:900px){ .treino-card { flex:1 1 calc(50% - 20px); } }
+  @media(max-width:600px){ .treino-card { flex:1 1 100%; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Treino Diário</h1>
+  <p>Treine em casa de forma simples e eficiente todos os dias.</p>
+</header>
+
+<nav>
+  <a href="#inicio">Início</a>
+  <a href="#treinos">Treinos</a>
+  <a href="#contato">Contato</a>
+</nav>
+
+<section id="inicio">
+  <h2>Bem-vindo!</h2>
+  <p>Organize seus treinos diários com exercícios detalhados, separados por nível e grupo muscular. Substitua qualquer exercício dentro do mesmo grupo para variar sua rotina.</p>
+</section>
+
+<section id="treinos">
+  <h2>Treinos por Nível</h2>
+
+  <div id="treinos-iniciante" class="nivel-section">
+    <h3>Iniciante</h3>
+    <div class="treino-container"></div>
+  </div>
+
+  <div id="treinos-intermediario" class="nivel-section">
+    <h3>Intermediário</h3>
+    <div class="treino-container"></div>
+  </div>
+
+  <div id="treinos-avancado" class="nivel-section">
+    <h3>Avançado</h3>
+    <div class="treino-container"></div>
+  </div>
+</section>
+
+<section id="contato">
+  <h2>Contato</h2>
+  <p>Email: <a href="mailto:treinodiario96@gmail.com">treinodiario96@gmail.com</a></p>
+</section>
+
+<footer>
+  <p>&copy; 2025 Treino Diário</p>
+  <p>
+    <a href="#">Termos</a> |
+    <a href="#">Privacidade</a> |
+    <a href="mailto:treinodiario96@gmail.com">Contato</a>
+  </p>
+</footer>
+
+<script>
+const treinosPorNivel = {
+  iniciante: document.querySelector('#treinos-iniciante .treino-container'),
+  intermediario: document.querySelector('#treinos-intermediario .treino-container'),
+  avancado: document.querySelector('#treinos-avancado .treino-container')
+};
+
+// SVG simplificado para cada grupo muscular
+const svgs = {
+  pernas: `<svg viewBox="0 0 64 64"><circle cx="32" cy="10" r="4"/><rect x="30" y="14" width="4" height="20"/><line x1="32" y1="34" x2="20" y2="54" stroke="#56ab2f" stroke-width="4"/><line x1="32" y1="34" x2="44" y2="54" stroke="#56ab2f" stroke-width="4"/></svg>`,
+  peito: `<svg viewBox="0 0 64 64"><c
+  
